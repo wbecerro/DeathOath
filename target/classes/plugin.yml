@@ -1,0 +1,10 @@
+name: DeathOath
+version: 1.0
+main: wbe.deathoath.DeathOath
+api-version: 1.20.4
+author: wbe
+commands:
+  DeathOath:
+    description: DeathOath main command
+    aliases: [deatho, doath, doth]
+    permission: deathoath.command
