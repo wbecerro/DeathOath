@@ -1,36 +1,44 @@
 package wbe.deathoath;
 
 import org.bukkit.Bukkit;
-import org.bukkit.GameRule;
-import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import wbe.deathoath.commads.CommandListener;
+import wbe.deathoath.config.Config;
+import wbe.deathoath.config.Messages;
+import wbe.deathoath.listeners.EventListeners;
 import wbe.deathoath.papi.PapiExtension;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.util.List;
-import java.util.UUID;
 
 public final class DeathOath extends JavaPlugin {
 
-    private final CommandListener commandListener = new CommandListener(this);
+    private FileConfiguration configuration;
 
-    private final EventListener eventListener = new EventListener(this);
+    private CommandListener commandListener;
 
-    private PapiExtension papiExtension = new PapiExtension(this);
+    private EventListeners eventListeners;
+
+    private PapiExtension papiExtension;
+
+    public static Config config;
+
+    public static Messages messages;
 
     @Override
     public void onEnable() {
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            papiExtension = new PapiExtension();
             papiExtension.register();
         }
         saveDefaultConfig();
         getLogger().info("DeathOath enabled correctly.");
+        reloadConfiguration();
+
+        commandListener = new CommandListener();
         getCommand("deathoath").setExecutor(this.commandListener);
-        getServer().getPluginManager().registerEvents(this.eventListener, this);
+        eventListeners = new EventListeners();
+        this.eventListeners.initializeListeners();
     }
 
     @Override
@@ -39,65 +47,17 @@ public final class DeathOath extends JavaPlugin {
         getLogger().info("DeathOath disabled correctly.");
     }
 
-    public int getLifes(UUID uuid) {
-        String fileName = "players/" + uuid.toString() + ".json";
-        File lifeFile = new File(getDataFolder(), fileName);
-        JSONParser jsonParser = new JSONParser();
-        try(FileReader reader = new FileReader(lifeFile)) {
-            Object lifeObject = jsonParser.parse(reader);
-            JSONObject lifeData = (JSONObject) lifeObject;
-            return Long.valueOf((Long) lifeData.get("lifes")).intValue();
-        } catch(Exception exception) {
-            exception.printStackTrace();
-            return -1;
-        }
+    public static DeathOath getInstance() {
+        return getPlugin(DeathOath.class);
     }
 
-    public boolean removeLifes(UUID uuid, int amount) {
-        String fileName = "players/" + uuid.toString() + ".json";
-        int lifes = getLifes(uuid) - amount;
-        JSONObject lifesData = new JSONObject();
-        lifesData.put("lifes", lifes);
-
-        try(FileWriter writer = new FileWriter(new File(getDataFolder(), fileName), false)) {
-            writer.write(lifesData.toJSONString());
-            writer.flush();
-            return true;
-        } catch(Exception exception) {
-            exception.printStackTrace();
-            return false;
+    public void reloadConfiguration() {
+        if(!new File(getDataFolder(), "config.yml").exists()) {
+            saveDefaultConfig();
         }
-    }
-
-    public boolean addLifes(UUID uuid, int amount) {
-        String fileName = "players/" + uuid.toString() + ".json";
-        int lifes = getLifes(uuid) + amount;
-        JSONObject lifesData = new JSONObject();
-        lifesData.put("lifes", lifes);
-
-        try(FileWriter writer = new FileWriter(new File(getDataFolder(), fileName), false)) {
-            writer.write(lifesData.toJSONString());
-            writer.flush();
-            return true;
-        } catch(Exception exception) {
-            exception.printStackTrace();
-            return false;
-        }
-    }
-
-    public boolean setLifes(UUID uuid, int amount) {
-        String fileName = "players/" + uuid.toString() + ".json";
-        int lifes = amount;
-        JSONObject lifesData = new JSONObject();
-        lifesData.put("lifes", lifes);
-
-        try(FileWriter writer = new FileWriter(new File(getDataFolder(), fileName), false)) {
-            writer.write(lifesData.toJSONString());
-            writer.flush();
-            return true;
-        } catch(Exception exception) {
-            exception.printStackTrace();
-            return false;
-        }
+        reloadConfig();
+        configuration = getConfig();
+        messages = new Messages(configuration);
+        config = new Config(configuration);
     }
 }

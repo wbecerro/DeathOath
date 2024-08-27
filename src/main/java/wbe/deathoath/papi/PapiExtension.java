@@ -3,12 +3,16 @@ package wbe.deathoath.papi;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
 import wbe.deathoath.DeathOath;
+import wbe.deathoath.util.Utilities;
 
 public class PapiExtension extends PlaceholderExpansion {
-    private DeathOath plugin;
 
-    public PapiExtension(DeathOath plugin) {
-        this.plugin = plugin;
+    private DeathOath plugin = DeathOath.getInstance();
+
+    private Utilities utilities;
+
+    public PapiExtension() {
+        this.utilities = new Utilities();
     }
 
     @Override
@@ -34,7 +38,7 @@ public class PapiExtension extends PlaceholderExpansion {
     @Override
     public String onRequest(OfflinePlayer player, String params) {
         if(params.equalsIgnoreCase("lifes")) {
-            return String.valueOf(plugin.getLifes(player.getUniqueId()));
+            return String.valueOf(utilities.getLifes(player.getUniqueId()));
         }
 
         return null;

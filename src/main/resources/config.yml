@@ -1,16 +1,15 @@
-Variables:
-  initialLifes: 3
-  unbanLifes: 1
-  hoursOfTimeout: 24
 Messages:
   notEnoughArgs: '&b[&cHardcore&b] &eNo has especificado suficientes argumentos.'
   noPermission: '&b[&cHardcore&b] &eNo tienes permiso para hacer esto.'
   lifeAdded: '&b[&cHardcore&b] &eHas añadido %lifes% vida%s% a %player%.'
   lifeAddedPlayer: '&b[&cHardcore&b] &eHas ganado %lifes% vida%s%.'
+  lifeAddArgs: '&b[&cHardcore&b] &eEl uso es /deathoath add <Jugador> <Vidas>'
   lifeRemoved: '&b[&cHardcore&b] &eHas quitado %lifes% vida%s% a %player%.'
   lifeRemovedPlayer: '&b[&cHardcore&b] &eHas perdido %lifes% vida%s%.'
+  lifeRemoveArgs: '&b[&cHardcore&b] &eEl uso es /deathoath remove <Jugador> <Vidas>'
   lifeSet: '&b[&cHardcore&b] &eHas establecido las vidas de %player% a %lifes%.'
   lifeSetPlayer: '&b[&cHardcore&b] &eTus vidas se han establecido a %lifes%.'
+  lifeSetArgs: '&b[&cHardcore&b] &eEl uso es /deathoath set <Jugador> <Vidas>'
   lifeMessage: '&b[&cHardcore&b] &eEl jugador %player% tiene %lifes% vida%s%.'
   lifeMessagePlayer: '&b[&cHardcore&b] &eTienes %lifes% vida%s%.'
   youDiedTitle: '&4¡HAS MUERTO!'
@@ -20,6 +19,9 @@ Messages:
   outOfLifes: '&cHas agotado tus oportunidades, espera a que los dioses te perdonen.'
   cannotBeNegative: '&b[&cHardcore&b] &eLa cantidad de vidas no puede ser menor de 1.'
   bypass: '&b[&cHardcore&b] &eTienes la bendición de los dioses y no puedes perder vidas.'
+  itemGiven: '&b[&cHardcore&b] &eHas dado una &c&lManzana de Iðunn &ea %player%.'
+  itemGivenPlayer: '&b[&cHardcore&b] &eHas recibido una &c&lManzana de Iðunn&e.'
+  reload: '&b[&cHardcore&b] &eSe ha recargado la configuración del plugin con éxito.'
   help:
     - "&b-===-[&cHardcore&b]-===-"
     - "&b/deathoath &eMuestra esta página."
@@ -28,3 +30,21 @@ Messages:
     - "&b/deathoath add <Jugador> <Vidas> &eAñade vidas a un jugador."
     - "&b/deathoath remove <Jugador> <Vidas> &eResta vidas a un jugador."
     - "&b/deathoath set <Jugador> <Vidas> &eEstablece las vidas de un jugador."
+    - "&b/deathoath lifeItem [Cantidad] [Jugador] &eDa una &c&lManzana de Iðunn&e."
+    - "&b"
+    - "&eLeyenda: &b<> &eObligatorio  &b[] &eOpcional"
+
+Config:
+  initialLifes: 3
+  unbanLifes: 1
+  hoursOfTimeout: 24
+
+Items:
+  LifeItem:
+    material: ENCHANTED_GOLDEN_APPLE
+    name: "&f🖤 &c&lManzana de Iðunn &f🖤"
+    lore:
+      - ""
+      - "&7Usa esta manzana del rejuvenecimiento y la"
+      - "&7inmortalidad para añadir %lifes% vida%s% a tu contador."
+    baseItemAmount: 1
