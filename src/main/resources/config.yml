@@ -31,6 +31,7 @@ Messages:
     - "&b/deathoath remove <Jugador> <Vidas> &eResta vidas a un jugador."
     - "&b/deathoath set <Jugador> <Vidas> &eEstablece las vidas de un jugador."
     - "&b/deathoath lifeItem [Cantidad] [Jugador] &eDa una &c&lManzana de Iðunn&e."
+    - "&b/deathoath reload &eRecarga el plugin."
     - "&b"
     - "&eLeyenda: &b<> &eObligatorio  &b[] &eOpcional"
 

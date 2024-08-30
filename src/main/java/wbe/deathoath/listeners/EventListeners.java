@@ -1,11 +1,10 @@
 package wbe.deathoath.listeners;
 
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import wbe.deathoath.DeathOath;
 import wbe.deathoath.util.Utilities;
 
-public class EventListeners implements Listener {
+public class EventListeners {
 
     private DeathOath plugin = DeathOath.getInstance();
 

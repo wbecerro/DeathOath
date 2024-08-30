@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -19,7 +20,15 @@ public class PlayerInteractListeners implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void useItemOnInteract(PlayerInteractEvent event) {
+        if(!event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
+            return;
+        }
+
         ItemStack item = event.getItem();
+        if(item == null) {
+            return;
+        }
+
         if(item.getType().equals(Material.AIR)) {
             return;
         }
