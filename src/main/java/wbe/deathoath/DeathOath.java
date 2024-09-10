@@ -1,7 +1,9 @@
 package wbe.deathoath;
 
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import wbe.deathoath.commads.CommandListener;
 import wbe.deathoath.config.Config;
@@ -20,6 +22,8 @@ public final class DeathOath extends JavaPlugin {
     private EventListeners eventListeners;
 
     private PapiExtension papiExtension;
+
+    public static Economy economy;
 
     public static Config config;
 
@@ -57,6 +61,13 @@ public final class DeathOath extends JavaPlugin {
         }
         reloadConfig();
         configuration = getConfig();
+        if(Bukkit.getPluginManager().getPlugin("Vault") != null) {
+            RegisteredServiceProvider<Economy> registeredServiceProvider = Bukkit.getServicesManager()
+                    .getRegistration(Economy.class);
+            if(registeredServiceProvider != null) {
+                economy = registeredServiceProvider.getProvider();
+            }
+        }
         messages = new Messages(configuration);
         config = new Config(configuration);
     }

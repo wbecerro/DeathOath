@@ -35,7 +35,7 @@ public class CommandListener implements CommandExecutor {
                     sender.sendMessage(x.replace("&", "§"));
                 }
             } else if(args[0].equalsIgnoreCase("get")) {
-                if(!sender.hasPermission("deathoath.command.add")) {
+                if(!sender.hasPermission("deathoath.command.get")) {
                     sender.sendMessage(DeathOath.messages.noPermission);
                     return false;
                 }

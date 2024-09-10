@@ -13,6 +13,8 @@ public class Config {
     public int initialLifes;
     public int unbanLifes;
     public int hoursOfTimeout;
+    public boolean enableMoneyLoss;
+    public float moneyLossPercent;
 
     public Material lifeMaterial;
     public String lifeName;
@@ -25,6 +27,8 @@ public class Config {
         initialLifes = config.getInt("Config.initialLifes");
         unbanLifes = config.getInt("Config.unbanLifes");
         hoursOfTimeout = config.getInt("Config.hoursOfTimeout");
+        enableMoneyLoss = config.getBoolean("Config.enableMoneyLoss");
+        moneyLossPercent = (float) config.getDouble("Config.moneyLossPercent");
 
         lifeMaterial = Material.valueOf(config.getString("Items.LifeItem.material"));
         lifeName = config.getString("Items.LifeItem.name").replace("&", "§");

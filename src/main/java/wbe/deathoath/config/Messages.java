@@ -32,6 +32,7 @@ public class Messages {
     public String itemGiven;
     public String itemGivenPlayer;
     public String reload;
+    public String moneyLoss;
     public List<String> help = new ArrayList<>();
 
     public Messages(FileConfiguration config) {
@@ -60,6 +61,7 @@ public class Messages {
         itemGiven = config.getString("Messages.itemGiven").replace("&", "§");
         itemGivenPlayer = config.getString("Messages.itemGivenPlayer").replace("&", "§");
         reload = config.getString("Messages.reload").replace("&", "§");
+        moneyLoss = config.getString("Messages.moneyLoss").replace("&", "§");
         help = config.getStringList("Messages.help");
     }
 }
