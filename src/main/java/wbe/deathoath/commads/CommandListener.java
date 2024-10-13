@@ -240,7 +240,11 @@ public class CommandListener implements CommandExecutor {
                     player = Bukkit.getPlayer(args[2]);
                 }
 
-                player.getInventory().addItem(life);
+                if(player.getInventory().firstEmpty() == -1) {
+                    player.getWorld().dropItem(player.getLocation(), life);
+                } else {
+                    player.getInventory().addItem(life);
+                }
             } else if(args[0].equalsIgnoreCase("reload")) {
                 if(!sender.hasPermission("deathoath.command.reload")) {
                     sender.sendMessage(DeathOath.messages.noPermission);
