@@ -12,6 +12,16 @@ Messages:
   lifeSetArgs: '&b[&cHardcore&b] &eEl uso es /deathoath set <Jugador> <Vidas>'
   lifeMessage: '&b[&cHardcore&b] &eEl jugador %player% tiene %lifes% vida%s%.'
   lifeMessagePlayer: '&b[&cHardcore&b] &eTienes %lifes% vida%s%.'
+  transferArgs: '&b[&cHardcore&b] &eEl uso es /deathoath transfer <Jugador> <Vidas>'
+  notEnoughLifes: '&b[&cHardcore&b] &eNo tienes suficientes vidas para transferir.'
+  transferMessage: '&b[&cHardcore&b] &eHas transferido %lifes% vida%s% a %player%.'
+  transferPlayer: '&b[&cHardcore&b] &e%player% te ha transferido %lifes% vida%s%.'
+  cannotTransferSelf: '&b[&cHardcore&b] &eNo puedes transferirte vidas a ti mismo.'
+  devilPactArgs: '&b[&cHardcore&b] &eEl uso es /deathoath sacrifice/regain <Contenedores/Vidas>'
+  cannotHaveLessContainers: '&b[&cHardcore&b] &eNo puedes tener menos de %containers% corazones.'
+  cannotHaveMoreContainers: '&b[&cHardcore&b] &eNo puedes tener más de %containers% corazones.'
+  lostContainers: '&b[&cHardcore&b] &eEl diablo ha aceptado tu trato, has perdido %containers% corazones a cambio de %lifes% vida%s%.'
+  addedContainers: '&b[&cHardcore&b] &eEl diablo ha aceptado tu trato, has ganado %containers% corazones a cambio de %lifes% vida%s%.'
   youDiedTitle: '&4¡HAS MUERTO!'
   youDiedSubTitle: '&cHas perdido 1 vida'
   addedToData: '&b[&cHardcore&b] &eSe te han asignado %lifes% vidas para comenzar.'
@@ -32,6 +42,9 @@ Messages:
     - "&b/deathoath remove <Jugador> <Vidas> &eResta vidas a un jugador."
     - "&b/deathoath set <Jugador> <Vidas> &eEstablece las vidas de un jugador."
     - "&b/deathoath lifeItem [Cantidad] [Jugador] &eDa una &c&lManzana de Iðunn&e."
+    - "&b/deathoath transfer <Jugador> <Vidas> &eTransfiere vidas a otro jugador."
+    - "&b/deathoath devilPact sacrifice <Contenedores> &eSacrifica contenedores de vida por vidas."
+    - "&b/deathoath devilPact regain <Vidas> &eSacrifica vidas para ganar contenedores."
     - "&b/deathoath reload &eRecarga el plugin."
     - "&b"
     - "&eLeyenda: &b<> &eObligatorio  &b[] &eOpcional"
@@ -41,7 +54,9 @@ Config:
   unbanLifes: 1
   hoursOfTimeout: 24
   enableMoneyLoss: true
-  moneyLossPercent: 0.1
+  moneyLossPercent: 0.2
+  minContainers: -6
+  maxContainers: 6
 
 Items:
   LifeItem:

@@ -22,27 +22,27 @@ public class CommandListener implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(cmd.getName().equalsIgnoreCase("DeathOath")) {
             Player player = null;
-            if(sender instanceof Player) {
+            if (sender instanceof Player) {
                 player = (Player) sender;
             }
 
-            if(args.length == 0 || args[0].equalsIgnoreCase("help")) {
-                if(!sender.hasPermission("deathoath.command.help")) {
+            if (args.length == 0 || args[0].equalsIgnoreCase("help")) {
+                if (!sender.hasPermission("deathoath.command.help")) {
                     sender.sendMessage(DeathOath.messages.noPermission);
                     return false;
                 }
-                for(String x : DeathOath.messages.help) {
+                for (String x : DeathOath.messages.help) {
                     sender.sendMessage(x.replace("&", "§"));
                 }
-            } else if(args[0].equalsIgnoreCase("get")) {
-                if(!sender.hasPermission("deathoath.command.get")) {
+            } else if (args[0].equalsIgnoreCase("get")) {
+                if (!sender.hasPermission("deathoath.command.get")) {
                     sender.sendMessage(DeathOath.messages.noPermission);
                     return false;
                 }
                 int lifes = 0;
-                if(player != null && args.length == 1) {
+                if (player != null && args.length == 1) {
                     lifes = utilities.getLifes(player.getUniqueId());
-                    if(lifes == 1) {
+                    if (lifes == 1) {
                         sender.sendMessage(DeathOath.messages.lifeMessagePlayer
                                 .replace("%lifes%", String.valueOf(lifes))
                                 .replace("%s%", ""));
@@ -54,7 +54,7 @@ public class CommandListener implements CommandExecutor {
                 } else {
                     Player receiver = Bukkit.getServer().getPlayer(args[1]);
                     lifes = utilities.getLifes(receiver.getUniqueId());
-                    if(lifes == 1) {
+                    if (lifes == 1) {
                         sender.sendMessage(DeathOath.messages.lifeMessage
                                 .replace("%player%", receiver.getName())
                                 .replace("%lifes%", String.valueOf(lifes))
@@ -67,25 +67,25 @@ public class CommandListener implements CommandExecutor {
                     }
                 }
 
-            } else if(args[0].equalsIgnoreCase("remove")) {
-                if(!sender.hasPermission("deathoath.command.remove")) {
+            } else if (args[0].equalsIgnoreCase("remove")) {
+                if (!sender.hasPermission("deathoath.command.remove")) {
                     sender.sendMessage(DeathOath.messages.noPermission);
                     return false;
                 }
-                if(args.length < 3) {
+                if (args.length < 3) {
                     sender.sendMessage(DeathOath.messages.notEnoughArgs);
                     sender.sendMessage(DeathOath.messages.lifeRemoveArgs);
                     return false;
                 }
                 Player receiver = Bukkit.getServer().getPlayer(args[1]);
-                int lifes = Integer.valueOf(args[2]);
-                if(lifes < 1) {
+                int lifes = Integer.parseInt(args[2]);
+                if (lifes < 1) {
                     sender.sendMessage(DeathOath.messages.cannotBeNegative);
                     return false;
                 }
                 boolean ok = utilities.removeLifes(receiver.getUniqueId(), lifes);
-                if(ok) {
-                    if(lifes == 1) {
+                if (ok) {
+                    if (lifes == 1) {
                         sender.sendMessage(DeathOath.messages.lifeRemoved
                                 .replace("%lifes%", String.valueOf(lifes))
                                 .replace("%player%", receiver.getName())
@@ -105,25 +105,25 @@ public class CommandListener implements CommandExecutor {
                     return true;
                 }
                 return false;
-            } else if(args[0].equalsIgnoreCase("add")) {
-                if(!sender.hasPermission("deathoath.command.add")) {
+            } else if (args[0].equalsIgnoreCase("add")) {
+                if (!sender.hasPermission("deathoath.command.add")) {
                     sender.sendMessage(DeathOath.messages.noPermission);
                     return false;
                 }
-                if(args.length < 3) {
+                if (args.length < 3) {
                     sender.sendMessage(DeathOath.messages.notEnoughArgs);
                     sender.sendMessage(DeathOath.messages.lifeAddArgs);
                     return false;
                 }
                 Player receiver = Bukkit.getServer().getPlayer(args[1]);
-                int lifes = Integer.valueOf(args[2]);
-                if(lifes < 1) {
+                int lifes = Integer.parseInt(args[2]);
+                if (lifes < 1) {
                     sender.sendMessage(DeathOath.messages.cannotBeNegative);
                     return false;
                 }
                 boolean ok = utilities.addLifes(receiver.getUniqueId(), lifes);
-                if(ok) {
-                    if(lifes == 1) {
+                if (ok) {
+                    if (lifes == 1) {
                         sender.sendMessage(DeathOath.messages.lifeAdded
                                 .replace("%lifes%", String.valueOf(lifes))
                                 .replace("%player%", receiver.getName())
@@ -143,25 +143,25 @@ public class CommandListener implements CommandExecutor {
                     return true;
                 }
                 return false;
-            } else if(args[0].equalsIgnoreCase("set")) {
-                if(!sender.hasPermission("deathoath.command.set")) {
+            } else if (args[0].equalsIgnoreCase("set")) {
+                if (!sender.hasPermission("deathoath.command.set")) {
                     sender.sendMessage(DeathOath.messages.noPermission);
                     return false;
                 }
 
-                if(args.length < 3) {
+                if (args.length < 3) {
                     sender.sendMessage(DeathOath.messages.notEnoughArgs);
                     sender.sendMessage(DeathOath.messages.lifeSetArgs);
                     return false;
                 }
                 Player receiver = Bukkit.getServer().getPlayer(args[1]);
-                int lifes = Integer.valueOf(args[2]);
-                if(lifes < 1) {
+                int lifes = Integer.parseInt(args[2]);
+                if (lifes < 1) {
                     sender.sendMessage(DeathOath.messages.cannotBeNegative);
                     return false;
                 }
                 boolean ok = utilities.setLifes(receiver.getUniqueId(), lifes);
-                if(ok) {
+                if (ok) {
                     sender.sendMessage(DeathOath.messages.lifeSet
                             .replace("%lifes%", String.valueOf(lifes))
                             .replace("%player%", receiver.getName()));
@@ -170,6 +170,60 @@ public class CommandListener implements CommandExecutor {
                     return true;
                 }
                 return false;
+            } else if (args[0].equalsIgnoreCase("transfer")) {
+                if (!sender.hasPermission("deathoath.command.transfer")) {
+                    sender.sendMessage(DeathOath.messages.noPermission);
+                    return false;
+                }
+
+                if (args.length < 3) {
+                    sender.sendMessage(DeathOath.messages.notEnoughArgs);
+                    sender.sendMessage(DeathOath.messages.transferArgs);
+                    return false;
+                }
+                Player receiver = Bukkit.getServer().getPlayer(args[1]);
+                if (receiver.getUniqueId().equals(player.getUniqueId())) {
+                    sender.sendMessage(DeathOath.messages.cannotTransferSelf);
+                    return false;
+                }
+                int lifes = Integer.parseInt(args[2]);
+                if (lifes < 1) {
+                    sender.sendMessage(DeathOath.messages.cannotBeNegative);
+                    return false;
+                }
+
+                if (!utilities.hasEnoughLifes(lifes, player.getUniqueId())) {
+                    sender.sendMessage(DeathOath.messages.notEnoughLifes);
+                    return false;
+                }
+
+                boolean ok = utilities.transferLifes(player.getUniqueId(), receiver.getUniqueId(), lifes);
+                if (ok) {
+                    sender.sendMessage(DeathOath.messages.transferMessage
+                            .replace("%lifes%", String.valueOf(lifes))
+                            .replace("%player%", receiver.getName())
+                            .replace("%s%", lifes > 1 ? "s" : ""));
+                    receiver.sendMessage(DeathOath.messages.transferPlayer
+                            .replace("%lifes%", String.valueOf(lifes))
+                            .replace("%player%", player.getName())
+                            .replace("%s%", lifes > 1 ? "s" : ""));
+                    return true;
+                }
+                return false;
+            } else if(args[0].equalsIgnoreCase("devilPact")) {
+                if(!sender.hasPermission("deathoath.command.devilPact")) {
+                    sender.sendMessage(DeathOath.messages.noPermission);
+                    return false;
+                }
+
+                String type = args[1];
+                int amount = Integer.parseInt(args[2]);
+                if(type.equalsIgnoreCase("sacrifice")) {
+                    utilities.sacrifice(player.getUniqueId(), amount);
+                } else if(type.equalsIgnoreCase("regain")) {
+                    utilities.regain(player.getUniqueId(), amount);
+                }
+
             } else if(args[0].equalsIgnoreCase("lifeItem")) {
                 if(!sender.hasPermission("deathoath.command.lifeItem")) {
                     sender.sendMessage(DeathOath.messages.noPermission);
@@ -178,7 +232,7 @@ public class CommandListener implements CommandExecutor {
 
                 int amount = DeathOath.config.baseItemAmount;
                 if(args.length > 1) {
-                    amount = Integer.valueOf(args[1]);
+                    amount = Integer.parseInt(args[1]);
                 }
                 Life life = new Life(amount);
 

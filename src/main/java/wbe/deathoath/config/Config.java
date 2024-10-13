@@ -15,6 +15,8 @@ public class Config {
     public int hoursOfTimeout;
     public boolean enableMoneyLoss;
     public float moneyLossPercent;
+    public int minContainers;
+    public int maxContainers;
 
     public Material lifeMaterial;
     public String lifeName;
@@ -29,6 +31,8 @@ public class Config {
         hoursOfTimeout = config.getInt("Config.hoursOfTimeout");
         enableMoneyLoss = config.getBoolean("Config.enableMoneyLoss");
         moneyLossPercent = (float) config.getDouble("Config.moneyLossPercent");
+        minContainers = config.getInt("Config.minContainers");
+        maxContainers = config.getInt("Config.maxContainers");
 
         lifeMaterial = Material.valueOf(config.getString("Items.LifeItem.material"));
         lifeName = config.getString("Items.LifeItem.name").replace("&", "§");

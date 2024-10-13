@@ -25,6 +25,7 @@ public class PlayerJoinListeners implements Listener {
         try {
             if(lifeFile.createNewFile()) {
                 utilities.setLifes(player.getUniqueId(), DeathOath.config.initialLifes);
+                utilities.setLifes(player.getUniqueId(), 0);
                 player.sendMessage(DeathOath.messages.addedToData
                         .replace("%lifes%", String.valueOf(DeathOath.config.initialLifes)));
             }
