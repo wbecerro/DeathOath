@@ -2,6 +2,7 @@ package wbe.deathoath.util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -170,7 +171,7 @@ public class Utilities {
 
     private void removeHealth(UUID uuid, int amount) {
         Player player = Bukkit.getServer().getPlayer(uuid);
-        double maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+        double maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue();
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHealth - amount * 2);
         removeContainers(uuid, amount);
     }
@@ -196,7 +197,7 @@ public class Utilities {
 
     private void addHealth(UUID uuid, int amount) {
         Player player = Bukkit.getServer().getPlayer(uuid);
-        double maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+        double maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue();
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHealth + amount * 2);
         addContainers(uuid, amount);
     }
