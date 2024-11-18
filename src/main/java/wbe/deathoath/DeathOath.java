@@ -31,6 +31,7 @@ public final class DeathOath extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        new File(this.getDataFolder(), "players").mkdir();
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             papiExtension = new PapiExtension();
             papiExtension.register();

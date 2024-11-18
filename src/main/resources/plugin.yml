@@ -3,6 +3,7 @@ version: 1.1
 main: wbe.deathoath.DeathOath
 api-version: 1.21
 depend: [Vault]
+softdepend: [ProtocolLib, PlaceholderAPI]
 author: wbe
 commands:
   DeathOath:

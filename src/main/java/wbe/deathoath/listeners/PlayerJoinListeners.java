@@ -20,12 +20,11 @@ public class PlayerJoinListeners implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void createFileIfNotExists(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        String fileName = player.getUniqueId().toString() + ".json";
+        String fileName = player.getUniqueId() + ".json";
         File lifeFile = new File(plugin.getDataFolder(), "players/" + fileName);
         try {
             if(lifeFile.createNewFile()) {
-                utilities.setLifes(player.getUniqueId(), DeathOath.config.initialLifes);
-                utilities.setLifes(player.getUniqueId(), 0);
+                utilities.addPlayerToData(player.getUniqueId());
                 player.sendMessage(DeathOath.messages.addedToData
                         .replace("%lifes%", String.valueOf(DeathOath.config.initialLifes)));
             }

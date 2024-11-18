@@ -2,7 +2,6 @@ package wbe.deathoath.util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -17,8 +16,20 @@ public class Utilities {
 
     DeathOath plugin = DeathOath.getInstance();
 
-    public Utilities() {
+    public boolean addPlayerToData(UUID uuid) {
+        String fileName = "players/" + uuid.toString() + ".json";
+        JSONObject lifesData = new JSONObject();
+        lifesData.put("lifes", DeathOath.config.initialLifes);
+        lifesData.put("containers", 0);
 
+        try(FileWriter writer = new FileWriter(new File(plugin.getDataFolder(), fileName), false)) {
+            writer.write(lifesData.toJSONString());
+            writer.flush();
+            return true;
+        } catch(Exception exception) {
+            exception.printStackTrace();
+            return false;
+        }
     }
 
     public int getLifes(UUID uuid) {
