@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import wbe.deathoath.commads.CommandListener;
+import wbe.deathoath.commads.TabListener;
 import wbe.deathoath.config.Config;
 import wbe.deathoath.config.Messages;
 import wbe.deathoath.listeners.EventListeners;
@@ -18,6 +19,8 @@ public final class DeathOath extends JavaPlugin {
     private FileConfiguration configuration;
 
     private CommandListener commandListener;
+
+    private TabListener tabListener;
 
     private EventListeners eventListeners;
 
@@ -42,6 +45,8 @@ public final class DeathOath extends JavaPlugin {
 
         commandListener = new CommandListener();
         getCommand("deathoath").setExecutor(this.commandListener);
+        tabListener = new TabListener();
+        getCommand("deathoath").setTabCompleter(tabListener);
         eventListeners = new EventListeners();
         this.eventListeners.initializeListeners();
     }

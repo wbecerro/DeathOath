@@ -30,6 +30,7 @@ public class EventListeners {
         pluginManager.registerEvents(new PlayerJoinListeners(), plugin);
         pluginManager.registerEvents(new PlayerRespawnListeners(), plugin);
         pluginManager.registerEvents(new PlayerInteractListeners(), plugin);
+        pluginManager.registerEvents(new PlayerLoseLifeListeners(), plugin);
 
         if(Bukkit.getPluginManager().getPlugin("ProtocolLib") != null) {
             ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
