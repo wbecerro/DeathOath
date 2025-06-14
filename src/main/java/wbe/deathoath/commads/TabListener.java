@@ -38,7 +38,11 @@ public class TabListener implements TabCompleter {
                 case "set":
                 case "transfer":
                     for(Player player : Bukkit.getOnlinePlayers()) {
-                        completions.add(player.getName());
+                        if(args[1].isEmpty()) {
+                            completions.add(player.getName());
+                        } else if(player.getName().startsWith(args[1])) {
+                            completions.add(player.getName());
+                        }
                     }
                     break;
                 case "lifeitem":
@@ -62,7 +66,11 @@ public class TabListener implements TabCompleter {
                     break;
                 case "lifeitem":
                     for(Player player : Bukkit.getOnlinePlayers()) {
-                        completions.add(player.getName());
+                        if(args[2].isEmpty()) {
+                            completions.add(player.getName());
+                        } else if(player.getName().startsWith(args[2])) {
+                            completions.add(player.getName());
+                        }
                     }
                     break;
                 case "devilpact":

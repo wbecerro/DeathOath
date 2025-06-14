@@ -21,16 +21,16 @@ public class PlayerLoseLifeListeners implements Listener {
 
         Player player = event.getPlayer();
 
-        double money = DeathOath.economy.getBalance(player) * DeathOath.config.moneyLossPercent;
-        EconomyResponse response = DeathOath.economy.withdrawPlayer(player, money);
-        if(response.transactionSuccess()) {
-            player.sendMessage(DeathOath.messages.moneyLoss
-                    .replace("%percent%", String.valueOf((int) (DeathOath.config.moneyLossPercent * 100)))
-                    .replace("%money%", DeathOath.economy.format(money)));
-        }
-
         if(!player.hasPermission("deathoath.bypass")) {
             utilities.removeLifes(player.getUniqueId(), 1);
+
+            double money = DeathOath.economy.getBalance(player) * DeathOath.config.moneyLossPercent;
+            EconomyResponse response = DeathOath.economy.withdrawPlayer(player, money);
+            if(response.transactionSuccess()) {
+                player.sendMessage(DeathOath.messages.moneyLoss
+                        .replace("%percent%", String.valueOf((int) (DeathOath.config.moneyLossPercent * 100)))
+                        .replace("%money%", DeathOath.economy.format(money)));
+            }
         } else {
             player.sendMessage(DeathOath.messages.bypass);
         }
